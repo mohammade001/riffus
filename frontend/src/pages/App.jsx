@@ -97,6 +97,38 @@ function RecentlyPlayed({ songs, onPlay }) {
   )
 }
 
+function SearchResults({ songs, onPlay, onOrder }) {
+  return (
+    <div className="mt-6">
+      <h3 className="px-5 text-lg font-semibold">Search Results</h3>
+      <div className="mt-3 px-4 flex flex-col gap-3">
+        {songs.length > 0 ? (
+          songs.map((s) => (
+            <motion.div
+              key={s._id}
+              whileHover={{ scale: 1.01 }}
+              className="rounded-2xl bg-brand-card/60 glass p-3 flex items-center gap-3"
+            >
+              <img src={s.coverImage} className="w-16 h-16 rounded-xl object-cover" alt="cover" onClick={() => onPlay(s)}/>
+              <div className="flex-1 min-w-0" onClick={() => onPlay(s)}>
+                <p className="text-sm font-medium truncate">{s.title}</p>
+                <p className="text-xs text-white/60 truncate">{s.artist}</p>
+                <p className="text-[11px] text-white/40">{Intl.NumberFormat().format(s.playCount || 0)} / plays</p>
+              </div>
+              <button onClick={() => onOrder(s)} className="px-3 py-2 rounded-lg bg-[#6b5cff]/20 text-violet-300 hover:bg-[#6b5cff]/30 hover:shadow-glow transition text-xs">
+                Order Song
+              </button>
+            </motion.div>
+          ))
+        ) : (
+          <p className="px-5 text-white/60">No songs found.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
 
 function BottomNav() {
   const items = [
