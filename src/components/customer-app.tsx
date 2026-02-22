@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import type { SVGProps } from "react";
 import { SongDTO } from "@/modules/songs/types";
 import { UserDTO } from "@/modules/users/types";
+import Link from "next/link";
 
 type ApiResponse<T> = {
   success: boolean;
@@ -79,22 +80,39 @@ function TopBar({ user }: { user: UserDTO | null }) {
 
   return (
     <div className="flex items-center justify-between px-5 pt-6">
+
       <div className="flex items-center gap-3">
+
         <img src={currentUser.avatar} alt="avatar" className="h-10 w-10 rounded-full object-cover" />
+
         <div className="leading-tight">
           <p className="text-sm font-medium text-white/90">{currentUser.name}</p>
           <p className="text-[11px] text-violet-300">{currentUser.membershipType} Member</p>
         </div>
+
         <div className="mt-1 px-8">
           <p className="text-xl font-semibold leading-tight">Listen The</p>
         </div>
+
       </div>
+
+      <div className="flex items-center justify-between">  
+        
       <a
         href="/owner?role=owner"
         className="glass rounded-full p-2 text-white/80 transition hover:text-white hover:shadow-[0_10px_40px_rgba(107,92,255,0.35)]"
       >
         <Icon.Bell className="h-6 w-6" />
       </a>
+    
+    <a href="/auth?auth=login" className="rounded-md p-2 transition hover:text-white hover:shadow-[0_10px_40px_rgba(107,92,255,0.35)]">
+    login
+    </a>
+    <Link href="/auth?auth=signup" className="rounded-md p-2 transition hover:text-white hover:shadow-[0_10px_40px_rgba(107,92,255,0.35)]">
+    singup
+    </Link>
+      </div>
+    
     </div>
   );
 }
